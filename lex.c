@@ -11,6 +11,10 @@
 #define MAXNUM 5 //max number of digits for a number
 #define MAXIDENTIFIER 11 //max length of identifier name
 
+//global variables
+int tokenArr[500] = {0};//finalized token array
+
+
 typedef enum {
 skipsym = 1, identsym, numbersym, plussym, minussym,
 multsym, slashsym, fisym, eqsym, neqsym, lessym, leqsym,
@@ -19,12 +23,17 @@ periodsym, becomessym, beginsym, endsym, ifsym, thensym,
 whilesym, dosym, callsym, constsym, varsym, procsym, writesym,
 readsym , elsesym} token_type;
 
+int tokenize(int *fileArray)
+{
+    printf("\nstart tokenize\n");
+}
+
 int main(int argc, char *fileName[])
 {
     int fileArr[500] = {0};//array to store input
     int index = 0;//array index
     int curVal = 0;//current input value
-    int flag = 0;
+    int flag = 0;//EOF flag
     FILE* inputFile = fopen(fileName[1], "r");//file name string for input
 
         while(flag == 0)//loop through text and insert in array
@@ -45,4 +54,8 @@ int main(int argc, char *fileName[])
                 printf("whitespace\n");//debug, in final implement won't do anything
             }
         }
+        
+        //begin tokenization
+        tokenize(fileArr);
+
 }
