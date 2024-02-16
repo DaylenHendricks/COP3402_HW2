@@ -60,7 +60,7 @@ int main(int argc, char *fileName[])
             if(fileArr[i] == 99 && fileArr[i+1] == 111 && fileArr[i+2] == 110 && fileArr[i+3] == 115 && fileArr[i+4] == 116)
             {
                 tokenArr[tokenIndex] = constsym;
-                tokenIndex;
+                tokenIndex++;
             }
             
         }
