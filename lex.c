@@ -206,7 +206,6 @@ int main(int argc, char *fileName[])
                 int identLen = 0;
                 while(flag2 == 0)
                 {
-                    printf("hi");
                     if((fileArr[i] >= 65 && fileArr[i] <= 90) || (fileArr[i] >= 97 && fileArr[i] <= 122))
                     {
                                 tokenArr[tokenIndex] = identsym;
@@ -230,7 +229,6 @@ int main(int argc, char *fileName[])
                 char num[20];
                 tokenArr[tokenIndex] = numbersym;
                 tokenIndex++;
-                //tokenArr[tokenIndex] = fileArr[i];
                 int numLen = 0;
                 while(fileArr[i] >= 48 && fileArr[i] <= 57)
                 {
@@ -241,7 +239,6 @@ int main(int argc, char *fileName[])
                 int c = atoi(num);
                 tokenArr[tokenIndex] = c;
                 tokenIndex++;
-                i++;
             }
 //symbols
             //lparentsym
@@ -312,6 +309,20 @@ int main(int argc, char *fileName[])
             else if(fileArr[i] == 61)
             {
                 tokenArr[tokenIndex] = eqsym;
+                tokenIndex++;
+                i++;
+            }
+            //greater or equal
+            else if(fileArr[i] == 62 && fileArr[i+1] == 61)
+            {
+                tokenArr[tokenIndex] = gtrsym;
+                tokenIndex++;
+                i+=2;
+            }
+            //greater than
+            else if(fileArr[i] == 62)
+            {
+                tokenArr[tokenIndex] = gtrsym;
                 tokenIndex++;
                 i++;
             }
