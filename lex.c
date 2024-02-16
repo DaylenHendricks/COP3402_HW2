@@ -223,7 +223,7 @@ int main(int argc, char *fileName[])
                 }
 
             }
-    //numbers
+//numbers
             else if(fileArr[i] >= 48 && fileArr[i] <= 57)
             {
                 char num[20];
@@ -240,14 +240,47 @@ int main(int argc, char *fileName[])
                 int c = atoi(num);
                 tokenArr[tokenIndex] = c;
                 tokenIndex++;
+            }
+//symbols
+            //lparentsym
+           else if(fileArr[i] == 40)
+            {
+                tokenArr[tokenIndex] = lparentsym;
+                tokenIndex++;
                 i++;
             }
-
-//symbols
+            //rparentsym
+           else if(fileArr[i] == 41)
+            {
+                tokenArr[tokenIndex] = rparentsym;
+                tokenIndex++;
+                i++;
+            }
+            //mult
+           else if(fileArr[i] == 42)
+            {
+                tokenArr[tokenIndex] = multsym;
+                tokenIndex++;
+                i++;
+            }
+            //plus
+           else if(fileArr[i] == 43)
+            {
+                tokenArr[tokenIndex] = plussym;
+                tokenIndex++;
+                i++;
+            }
             //comma
            else if(fileArr[i] == 44)
             {
                 tokenArr[tokenIndex] = commasym;
+                tokenIndex++;
+                i++;
+            }
+            //minus
+           else if(fileArr[i] == 45)
+            {
+                tokenArr[tokenIndex] = minussym;
                 tokenIndex++;
                 i++;
             }
@@ -258,6 +291,13 @@ int main(int argc, char *fileName[])
                 tokenIndex++;
                 i++;
                 flag1 = 1;
+            }
+            //slash
+           else if(fileArr[i] == 47)
+            {
+                tokenArr[tokenIndex] = slashsym;
+                tokenIndex++;
+                i++;
             }
             //semicolon
             else if(fileArr[i] == 59)
@@ -270,6 +310,25 @@ int main(int argc, char *fileName[])
             else if(fileArr[i] == 61)
             {
                 tokenArr[tokenIndex] = eqsym;
+                tokenIndex++;
+                i++;
+            }
+            //not equal
+            else if(fileArr[i] == 60 && fileArr[i+1] == 62)
+            {
+                tokenArr[tokenIndex] = neqsym;
+                tokenIndex++;
+                i += 2;
+            }
+            else if(fileArr[i] == 60 && fileArr[i] == 61)
+            {
+                tokenArr[tokenIndex] = leqsym;
+                tokenIndex++;
+                i += 2;
+            }
+            else if(fileArr[i] == 60)
+            {
+                tokenArr[tokenIndex] = lessym;
                 tokenIndex++;
                 i++;
             }
