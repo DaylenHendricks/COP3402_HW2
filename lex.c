@@ -229,8 +229,8 @@ int main(int argc, char *fileName[])
                 }
 
             }
-    //symbols
-            else if(fileArr[i] >= 48 && fileArr[i] <= 57)//number
+    //numbers
+            else if(fileArr[i] >= 48 && fileArr[i] <= 57)
             {
                 tokenArr[tokenIndex] = numbersym;
                 tokenIndex++;
@@ -238,6 +238,7 @@ int main(int argc, char *fileName[])
                 tokenIndex++;
                 i++;
             }
+    //special symbols
            else if(fileArr[i] == 44)//comma
             {
                 tokenArr[tokenIndex] = commasym;
