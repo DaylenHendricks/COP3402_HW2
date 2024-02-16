@@ -27,22 +27,22 @@ readsym , elsesym} token_type;
 
 int main(int argc, char *fileName[])
 {
-    printf("Main function start\n");
     int fileArr[500] = {0};//array to store input
     int index = 0;//array index
     int curVal = 0;//current input value
-    int lastVal;
     int flag = 0;//EOF flag
+    int lastVal;
+    int varCount = 0;
     FILE* inputFile = fopen(fileName[1], "r");//file name string for input
-        printf("Begin file IO\n");
+
         while(flag == 0)//loop through text and insert in array
         {
             curVal = (int)fgetc(inputFile);//getting next value & cast to int
             if(curVal == 47)//finding "/"
             {
                 lastVal = curVal;
-                curVal = (int)fgetc(inputFile);//getting next value to check for "*"
-                if(curVal == 42 && lastVal == 47)//checking "/*"
+                curVal = (int)fgetc(inputFile);//getting next value & cast to int
+                if(curVal == 42 && lastVal == 47)//finding "/*"
                 {
                     int commentFlag = 0;//flag for comment exclusion loop
                     while(commentFlag == 0)
@@ -63,38 +63,41 @@ int main(int argc, char *fileName[])
             }
             if(curVal == -1)//end of file detection
             {
-                printf("EOF detected\n");
                 flag = 1;
             }
             else if(curVal == 10 || curVal == 32)// \n to whitespace
             {
                 fileArr[index] = 32;//insert value into array
-                printf("%d\n", fileArr[index]);
+                //printf("%d\n", fileArr[index]);
                 index++;//incrementing to next array index
             }
             else
             {
                 fileArr[index] = curVal;//insert value into array
-                printf("%d\n", curVal);//debugging to check input
+                //printf("%d\n", curVal);//debugging to check input
                 index++;//incrementing to next array index
             }
         }
-        printf("End file IO\n");
-    //begin tokenization
+        
+//begin tokenization
         int i = 0; 
-        int flag1 = 0;
-        printf("begin tokenization");
+        int flag1 = 0;    
         while(flag1 == 0)
         {
-            printf("\n\ntoken loop\n\n");
     //reserved words
 
+            
+            if(fileArr[i] == 32)
+            {
+                i++;
+            }
             //const
-            if(fileArr[i] == 99 && fileArr[i+1] == 111 && fileArr[i+2] == 110 && fileArr[i+3] == 115 && fileArr[i+4] == 116 && fileArr[i+5] == 32)
+            else if(fileArr[i] == 99 && fileArr[i+1] == 111 && fileArr[i+2] == 110 && fileArr[i+3] == 115 && fileArr[i+4] == 116 && fileArr[i+5] == 32)
             {
                 tokenArr[tokenIndex] = constsym;
                 tokenIndex++;
                 i += 6;
+                printf("%d", tokenArr[tokenIndex]);
             }
             
             //var
@@ -192,39 +195,30 @@ int main(int argc, char *fileName[])
                 tokenIndex++;
                 i += 6;
             }
+            
 
 
     //identifiers
             else if((fileArr[i] >= 65 && fileArr[i] <= 90) || (fileArr[i] >= 97 && fileArr[i] <= 122))
             {
-                int flag1 = 0;
+                int flag2 = 0;
                 char ident[100] ={0};
                 int identLen = 0;
-                while(flag1 == 0)
+                while(flag2 == 0)
                 {
-                    if(fileArr[i] != 44)
+                    if((fileArr[i] >= 65 && fileArr[i] <= 90) || (fileArr[i] >= 97 && fileArr[i] <= 122))
                     {
-                        if(fileArr[i] != 59)
-                        {
-                            if(fileArr[i] != 32)
-                            {
                                 tokenArr[tokenIndex] = identsym;
                                 tokenIndex++;
                                 ident[identLen] = fileArr[i];
                                 i++;
                                 identLen++;
-                            }
-                            else
-                            {
-                                flag = 1;
-                                i++;
-                            }
-                        }
-                        else
-                        {
-                            flag = 1;
-                            i++;
-                        }
+                    }
+                     else
+                    {
+                        flag2 = 1;
+                        i++;
+                        varCount++;
                     }
                 }
 
@@ -232,26 +226,56 @@ int main(int argc, char *fileName[])
     //numbers
             else if(fileArr[i] >= 48 && fileArr[i] <= 57)
             {
+                char num[20];
                 tokenArr[tokenIndex] = numbersym;
                 tokenIndex++;
-                tokenArr[tokenIndex] = fileArr[i];
+                //tokenArr[tokenIndex] = fileArr[i];
+                int numLen = 0;
+                while(fileArr[i] >= 48 && fileArr[i] <= 57)
+                {
+                    num[numLen] = fileArr[i];
+                    numLen++;
+                    i++;
+                }
+                int c = atoi(num);
+                tokenArr[tokenIndex] = c;
                 tokenIndex++;
                 i++;
             }
-    //special symbols
-           else if(fileArr[i] == 44)//comma
+
+//symbols
+            //comma
+           else if(fileArr[i] == 44)
             {
                 tokenArr[tokenIndex] = commasym;
                 tokenIndex++;
                 i++;
             }
-            else if(fileArr[i] == 46)//period
+            //period
+            else if(fileArr[i] == 46)
             {
                 tokenArr[tokenIndex] = periodsym;
                 tokenIndex++;
                 i++;
                 flag1 = 1;
             }
+            //semicolon
+            else if(fileArr[i] == 59)
+            {
+                tokenArr[tokenIndex] = semicolonsym;
+                tokenIndex++;
+                i++;
+            }
+            //equal
+            else if(fileArr[i] == 61)
+            {
+                tokenArr[tokenIndex] = eqsym;
+                tokenIndex++;
+                i++;
+            }
         }//tokenize while loop end
-        printf("end tokenization");
+        for(int i = 0; i < tokenIndex; i++)
+        {
+            printf("%d ", tokenArr[i]);
+        }
 }//main end
