@@ -27,20 +27,22 @@ readsym , elsesym} token_type;
 
 int main(int argc, char *fileName[])
 {
+    printf("Main function start\n");
     int fileArr[500] = {0};//array to store input
     int index = 0;//array index
     int curVal = 0;//current input value
+    int lastVal;
     int flag = 0;//EOF flag
     FILE* inputFile = fopen(fileName[1], "r");//file name string for input
-
+        printf("Begin file IO\n");
         while(flag == 0)//loop through text and insert in array
         {
             curVal = (int)fgetc(inputFile);//getting next value & cast to int
             if(curVal == 47)//finding "/"
             {
                 lastVal = curVal;
-                curVal = (int)fgetc(inputFile);//getting next value & cast to int
-                if(curVal == 42 && lastVal == 47)//finding "/*"
+                curVal = (int)fgetc(inputFile);//getting next value to check for "*"
+                if(curVal == 42 && lastVal == 47)//checking "/*"
                 {
                     int commentFlag = 0;//flag for comment exclusion loop
                     while(commentFlag == 0)
@@ -61,6 +63,7 @@ int main(int argc, char *fileName[])
             }
             if(curVal == -1)//end of file detection
             {
+                printf("EOF detected\n");
                 flag = 1;
             }
             else if(curVal == 10 || curVal == 32)// \n to whitespace
@@ -76,12 +79,14 @@ int main(int argc, char *fileName[])
                 index++;//incrementing to next array index
             }
         }
-        
-//begin tokenization
+        printf("End file IO\n");
+    //begin tokenization
         int i = 0; 
-        int flag1 = 0;    
+        int flag1 = 0;
+        printf("begin tokenization");
         while(flag1 == 0)
         {
+            printf("\n\ntoken loop\n\n");
     //reserved words
 
             //const
@@ -190,7 +195,7 @@ int main(int argc, char *fileName[])
 
 
     //identifiers
-            else if(fileArr[i] >= 65 && fileArr[i] <= 90 || fileArr[i] >= 97 && fileArr[i] <= 122)
+            else if((fileArr[i] >= 65 && fileArr[i] <= 90) || (fileArr[i] >= 97 && fileArr[i] <= 122))
             {
                 int flag1 = 0;
                 char ident[100] ={0};
@@ -233,11 +238,19 @@ int main(int argc, char *fileName[])
                 tokenIndex++;
                 i++;
             }
-           else if(fileArr[i] == 44)
+           else if(fileArr[i] == 44)//comma
             {
                 tokenArr[tokenIndex] = commasym;
                 tokenIndex++;
                 i++;
             }
+            else if(fileArr[i] == 46)//period
+            {
+                tokenArr[tokenIndex] = periodsym;
+                tokenIndex++;
+                i++;
+                flag1 = 1;
+            }
         }//tokenize while loop end
+        printf("end tokenization");
 }//main end
