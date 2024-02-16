@@ -206,6 +206,7 @@ int main(int argc, char *fileName[])
                 int identLen = 0;
                 while(flag2 == 0)
                 {
+                    printf("hi");
                     if((fileArr[i] >= 65 && fileArr[i] <= 90) || (fileArr[i] >= 97 && fileArr[i] <= 122))
                     {
                                 tokenArr[tokenIndex] = identsym;
@@ -223,7 +224,7 @@ int main(int argc, char *fileName[])
                 }
 
             }
-    //numbers
+//numbers
             else if(fileArr[i] >= 48 && fileArr[i] <= 57)
             {
                 char num[20];
@@ -242,12 +243,46 @@ int main(int argc, char *fileName[])
                 tokenIndex++;
                 i++;
             }
-
 //symbols
+            //lparentsym
+           else if(fileArr[i] == 40)
+            {
+                tokenArr[tokenIndex] = lparentsym;
+                tokenIndex++;
+                i++;
+            }
+            //rparentsym
+           else if(fileArr[i] == 41)
+            {
+                tokenArr[tokenIndex] = rparentsym;
+                tokenIndex++;
+                i++;
+            }
+            //mult
+           else if(fileArr[i] == 42)
+            {
+                tokenArr[tokenIndex] = multsym;
+                tokenIndex++;
+                i++;
+            }
+            //plus
+           else if(fileArr[i] == 43)
+            {
+                tokenArr[tokenIndex] = plussym;
+                tokenIndex++;
+                i++;
+            }
             //comma
            else if(fileArr[i] == 44)
             {
                 tokenArr[tokenIndex] = commasym;
+                tokenIndex++;
+                i++;
+            }
+            //minus
+           else if(fileArr[i] == 45)
+            {
+                tokenArr[tokenIndex] = minussym;
                 tokenIndex++;
                 i++;
             }
@@ -258,6 +293,13 @@ int main(int argc, char *fileName[])
                 tokenIndex++;
                 i++;
                 flag1 = 1;
+            }
+            //slash
+           else if(fileArr[i] == 47)
+            {
+                tokenArr[tokenIndex] = slashsym;
+                tokenIndex++;
+                i++;
             }
             //semicolon
             else if(fileArr[i] == 59)
