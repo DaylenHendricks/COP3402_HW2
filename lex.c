@@ -36,19 +36,44 @@ int main(int argc, char *fileName[])
         while(flag == 0)//loop through text and insert in array
         {
             curVal = (int)fgetc(inputFile);//getting next value & cast to int
-            if(curVal == -1)
+            if(curVal == 47)//finding "/"
+            {
+                lastVal = curVal;
+                curVal = (int)fgetc(inputFile);//getting next value & cast to int
+                if(curVal == 42 && lastVal == 47)//finding "/*"
+                {
+                    int commentFlag = 0;//flag for comment exclusion loop
+                    while(commentFlag == 0)
+                    {
+                        lastVal = curVal;
+                        curVal = (int)fgetc(inputFile);//getting next value & cast to int
+                        if(curVal == 47 && lastVal == 42)
+                        {
+                            break;//want to break out of comment loop
+                        }
+                    }
+                }
+                else//if just "/"
+                {
+                fileArr[index] = lastVal;//store "/"
+                index++;//move on
+                }
+            }
+            if(curVal == -1)//end of file detection
             {
                 flag = 1;
             }
-            else if(curVal != 32 && curVal != 9 && curVal != 10)//whitespace exception
+            else if(curVal == 10 || curVal == 32)// \n to whitespace
             {
-                fileArr[index] = curVal;//insert value into array
-                printf("%d\n", curVal);//debugging to check input
+                fileArr[index] = 32;//insert value into array
+                printf("%d\n", fileArr[index]);
                 index++;//incrementing to next array index
             }
             else
             {
-                printf("whitespace\n");//debug, in final implement won't do anything
+                fileArr[index] = curVal;//insert value into array
+                printf("%d\n", curVal);//debugging to check input
+                index++;//incrementing to next array index
             }
         }
         
