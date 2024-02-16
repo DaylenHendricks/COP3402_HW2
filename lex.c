@@ -229,7 +229,6 @@ int main(int argc, char *fileName[])
                 char num[20];
                 tokenArr[tokenIndex] = numbersym;
                 tokenIndex++;
-                //tokenArr[tokenIndex] = fileArr[i];
                 int numLen = 0;
                 while(fileArr[i] >= 48 && fileArr[i] <= 57)
                 {
@@ -320,15 +319,30 @@ int main(int argc, char *fileName[])
                 tokenIndex++;
                 i += 2;
             }
+          //less than or equal
             else if(fileArr[i] == 60 && fileArr[i] == 61)
             {
                 tokenArr[tokenIndex] = leqsym;
                 tokenIndex++;
                 i += 2;
             }
+          //less than
             else if(fileArr[i] == 60)
             {
                 tokenArr[tokenIndex] = lessym;
+            }
+            //greater or equal
+            else if(fileArr[i] == 62 && fileArr[i+1] == 61)
+            {
+                tokenArr[tokenIndex] = gtrsym;
+                tokenIndex++;
+                i+=2;
+            }
+            //greater than
+            else if(fileArr[i] == 62)
+            {
+                tokenArr[tokenIndex] = gtrsym;
+
                 tokenIndex++;
                 i++;
             }
