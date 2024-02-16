@@ -15,6 +15,7 @@
 int tokenArr[500] = {0};//finalized token array
 int tokenIndex = 0;
 
+
 typedef enum {
 skipsym = 1, identsym, numbersym, plussym, minussym,
 multsym, slashsym, fisym, eqsym, neqsym, lessym, leqsym,
