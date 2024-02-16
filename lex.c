@@ -13,6 +13,7 @@
 
 //global variables
 int tokenArr[500] = {0};//finalized token array
+int tokenIndex = 0;
 
 
 typedef enum {
@@ -23,10 +24,6 @@ periodsym, becomessym, beginsym, endsym, ifsym, thensym,
 whilesym, dosym, callsym, constsym, varsym, procsym, writesym,
 readsym , elsesym} token_type;
 
-int tokenize(int *fileArray)
-{
-    printf("\nstart tokenize\n");
-}
 
 int main(int argc, char *fileName[])
 {
@@ -56,6 +53,17 @@ int main(int argc, char *fileName[])
         }
         
         //begin tokenization
-        tokenize(fileArr);
+        int i = 0; 
+        int flag1 = 0;    
+        while(flag1 == 0)
+        {
+            if(fileArr[i] == 99 && fileArr[i+1] == 111 && fileArr[i+2] == 110 && fileArr[i+3] == 115 && fileArr[i+4] == 116)
+            {
+                tokenArr[tokenIndex] = constsym;
+                tokenIndex;
+            }
+            
+        }
+
 
 }
