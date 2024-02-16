@@ -52,12 +52,12 @@ int main(int argc, char *fileName[])
             }
         }
         
-        //begin tokenization
+//begin tokenization
         int i = 0; 
         int flag1 = 0;    
         while(flag1 == 0)
         {
-            //checking for reserved words
+    //reserved words
 
             //const
             if(fileArr[i] == 99 && fileArr[i+1] == 111 && fileArr[i+2] == 110 && fileArr[i+3] == 115 && fileArr[i+4] == 116 && fileArr[i+5] == 32)
@@ -162,8 +162,57 @@ int main(int argc, char *fileName[])
                 tokenIndex++;
                 i += 6;
             }
-        
-        }
 
 
-}
+    //identifiers
+            else if(fileArr[i] >= 65 && fileArr[i] <= 90 || fileArr[i] >= 97 && fileArr[i] <= 122)
+            {
+                int flag1 = 0;
+                char ident[100] ={0};
+                int identLen = 0;
+                while(flag1 == 0)
+                {
+                    if(fileArr[i] != 44)
+                    {
+                        if(fileArr[i] != 59)
+                        {
+                            if(fileArr[i] != 32)
+                            {
+                                tokenArr[tokenIndex] = identsym;
+                                tokenIndex++;
+                                ident[identLen] = fileArr[i];
+                                i++;
+                                identLen++;
+                            }
+                            else
+                            {
+                                flag = 1;
+                                i++;
+                            }
+                        }
+                        else
+                        {
+                            flag = 1;
+                            i++;
+                        }
+                    }
+                }
+
+            }
+    //symbols
+            else if(fileArr[i] >= 48 && fileArr[i] <= 57)//number
+            {
+                tokenArr[tokenIndex] = numbersym;
+                tokenIndex++;
+                tokenArr[tokenIndex] = fileArr[i];
+                tokenIndex++;
+                i++;
+            }
+           else if(fileArr[i] == 44)
+            {
+                tokenArr[tokenIndex] = commasym;
+                tokenIndex++;
+                i++;
+            }
+        }//tokenize while loop end
+}//main end
