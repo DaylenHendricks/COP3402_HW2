@@ -95,7 +95,6 @@ int main(int argc, char *fileName[])
             else if(fileArr[i] == 99 && fileArr[i+1] == 111 && fileArr[i+2] == 110 && fileArr[i+3] == 115 && fileArr[i+4] == 116 && fileArr[i+5] == 32)
             {
                 tokenArr[tokenIndex] = constsym;
-                printf("hi");
                 tokenIndex++;
                 i += 6;
                 printf("%d", tokenArr[tokenIndex]);
@@ -207,21 +206,19 @@ int main(int argc, char *fileName[])
                 int identLen = 0;
                 while(flag2 == 0)
                 {
-                    if((fileArr[i] >= 65 && fileArr[i] <= 90) || (fileArr[i] >= 97 && fileArr[i] <= 122))//comma
+                    if((fileArr[i] >= 65 && fileArr[i] <= 90) || (fileArr[i] >= 97 && fileArr[i] <= 122))
                     {
                                 tokenArr[tokenIndex] = identsym;
                                 tokenIndex++;
                                 ident[identLen] = fileArr[i];
                                 i++;
                                 identLen++;
-                                printf("hii");
                     }
                      else
                     {
                         flag2 = 1;
                         i++;
                         varCount++;
-                        printf("hiii");
                     }
                 }
 
@@ -229,9 +226,19 @@ int main(int argc, char *fileName[])
 //numbers
             else if(fileArr[i] >= 48 && fileArr[i] <= 57)
             {
+                char num[20];
                 tokenArr[tokenIndex] = numbersym;
                 tokenIndex++;
-                tokenArr[tokenIndex] = fileArr[i];
+                //tokenArr[tokenIndex] = fileArr[i];
+                int numLen = 0;
+                while(fileArr[i] >= 48 && fileArr[i] <= 57)
+                {
+                    num[numLen] = fileArr[i];
+                    numLen++;
+                    i++;
+                }
+                int c = atoi(num);
+                tokenArr[tokenIndex] = c;
                 tokenIndex++;
                 i++;
             }
@@ -243,6 +250,14 @@ int main(int argc, char *fileName[])
                 tokenIndex++;
                 i++;
             }
+            //period
+            else if(fileArr[i] == 46)
+            {
+                tokenArr[tokenIndex] = periodsym;
+                tokenIndex++;
+                i++;
+                flag1 = 1;
+            }
             //semicolon
             else if(fileArr[i] == 59)
             {
@@ -250,18 +265,16 @@ int main(int argc, char *fileName[])
                 tokenIndex++;
                 i++;
             }
-            //period
-            else if(fileArr[i] == 46)
+            //equal
+            else if(fileArr[i] == 61)
             {
-                printf("hiiiiiii");
-                tokenArr[tokenIndex] = periodsym;
+                tokenArr[tokenIndex] = eqsym;
                 tokenIndex++;
                 i++;
-                flag1 = 1;
             }
         }//tokenize while loop end
-        /*for(int i = 0; i < tokenIndex; i++)
+        for(int i = 0; i < tokenIndex; i++)
         {
             printf("%d ", tokenArr[i]);
-        }*/
+        }
 }//main end
