@@ -57,12 +57,112 @@ int main(int argc, char *fileName[])
         int flag1 = 0;    
         while(flag1 == 0)
         {
-            if(fileArr[i] == 99 && fileArr[i+1] == 111 && fileArr[i+2] == 110 && fileArr[i+3] == 115 && fileArr[i+4] == 116)
+            //checking for reserved words
+
+            //const
+            if(fileArr[i] == 99 && fileArr[i+1] == 111 && fileArr[i+2] == 110 && fileArr[i+3] == 115 && fileArr[i+4] == 116 && fileArr[i+5] == 32)
             {
                 tokenArr[tokenIndex] = constsym;
                 tokenIndex++;
+                i += 6;
             }
             
+            //var
+            else if(fileArr[i] == 118 && fileArr[i+1] == 97 && fileArr[i+2] == 114 && fileArr[i+3] == 32)
+            {
+                tokenArr[tokenIndex] = varsym;
+                tokenIndex++;
+                i += 4;
+            }
+
+            //procedure
+            else if(fileArr[i] == 112 && fileArr[i+1] == 114 && fileArr[i+2] == 111 && fileArr[i+3] == 99 && fileArr[i+4] == 101 && fileArr[i+5] == 100 && fileArr[i+6] == 117 && fileArr[i+7] == 114 && fileArr[i+8] == 101 && fileArr[i+9] == 32)
+            {
+                tokenArr[tokenIndex] = procsym;
+                tokenIndex++;
+                i += 10;
+            }
+
+            //call
+            else if(fileArr[i] == 99 && fileArr[i+1] == 97 && fileArr[i+2] == 108 && fileArr[i+3] == 108 && fileArr[i+4] == 32)
+            {
+                tokenArr[tokenIndex] = callsym;
+                tokenIndex++;
+                i += 5;
+            }
+
+            //begin
+            else if(fileArr[i] == 98 && fileArr[i+1] == 101 && fileArr[i+2] == 103 && fileArr[i+3] == 105 && fileArr[i+4] == 110 && fileArr[i+5] == 32)
+            {
+                tokenArr[tokenIndex] = beginsym;
+                tokenIndex++;
+                i += 6;
+            }
+
+            //end
+            else if(fileArr[i] == 101 && fileArr[i+1] == 110 && fileArr[i+2] == 100 && fileArr[i+3] == 32)
+            {
+                tokenArr[tokenIndex] = endsym;
+                tokenIndex++;
+                i += 4;
+            }
+            //if
+            else if(fileArr[i] == 105 && fileArr[i+1] == 102 && fileArr[i+3] == 32)
+            {
+                tokenArr[tokenIndex] = ifsym;
+                tokenIndex++;
+                i += 3;
+            }
+            //fi?
+            else if(fileArr[i] == 102 && fileArr[i+1] == 105 && fileArr[i+3] == 32)
+            {
+                tokenArr[tokenIndex] = fisym;
+                tokenIndex++;
+                i += 3;
+            }
+            //then
+            else if(fileArr[i] == 116 && fileArr[i+1] == 104 && fileArr[i+2] == 101 && fileArr[i+3] == 110 && fileArr[i+4] == 32)
+            {
+                tokenArr[tokenIndex] = thensym;
+                tokenIndex++;
+                i += 5;
+            }
+            //else
+            else if(fileArr[i] == 101 && fileArr[i+1] == 108 && fileArr[i+2] == 115 && fileArr[i+3] == 101 && fileArr[i+4] == 32)
+            {
+                tokenArr[tokenIndex] = elsesym;
+                tokenIndex++;
+                i += 5;
+            }
+            //while
+            else if(fileArr[i] == 119 && fileArr[i+1] == 104 && fileArr[i+2] == 105 && fileArr[i+3] == 108 && fileArr[i+4] == 101 && fileArr[i+5] == 32)
+            {
+                tokenArr[tokenIndex] = whilesym;
+                tokenIndex++;
+                i += 6;
+            }
+            //do
+            else if(fileArr[i] == 100 && fileArr[i+1] == 111 && fileArr[i+3] == 32)
+            {
+                tokenArr[tokenIndex] = dosym;
+                tokenIndex++;
+                i += 3;
+            }
+            //read
+            else if(fileArr[i] == 114 && fileArr[i+1] == 101 && fileArr[i+2] == 97 && fileArr[i+3] == 100 && fileArr[i+4] == 32)
+            {
+                tokenArr[tokenIndex] = readsym;
+                tokenIndex++;
+                i += 5;
+            }
+            //write
+            else if(fileArr[i] == 119 && fileArr[i+1] == 114 && fileArr[i+2] == 105 && fileArr[i+3] == 116 && fileArr[i+4] == 101 && fileArr[i+5] == 32)
+            {
+                tokenArr[tokenIndex] = writesym;
+                tokenIndex++;
+                i += 6;
+            }
+        
         }
 
 
