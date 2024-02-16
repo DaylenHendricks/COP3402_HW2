@@ -223,7 +223,7 @@ int main(int argc, char *fileName[])
                 }
 
             }
-//numbers
+    //numbers
             else if(fileArr[i] >= 48 && fileArr[i] <= 57)
             {
                 char num[20];
@@ -242,6 +242,7 @@ int main(int argc, char *fileName[])
                 tokenIndex++;
                 i++;
             }
+
 //symbols
             //comma
            else if(fileArr[i] == 44)
