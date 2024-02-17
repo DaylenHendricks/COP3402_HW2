@@ -86,13 +86,11 @@ int main(int argc, char *fileName[])
             else if(curVal >= 0 && curVal <= 32)// \n to whitespace
             {
                 fileArr[index] = 32;//insert value into array
-                //printf("%d\n", fileArr[index]);
                 index++;//incrementing to next array index
             }
             else
             {
                 fileArr[index] = curVal;//insert value into array
-                //printf("%d\n", curVal);//debugging to check input
                 index++;//incrementing to next array index
             }
         }
