@@ -41,7 +41,7 @@ int main(int argc, char *fileName[])
         for(int i = 0; printFlag == 0; i++)
         {
             curVal = fgetc(inputFile);//getting next value & cast to int
-            if(curVal == EOF)
+            if(curVal == -1)
             {
                 printFlag = 1;
             }
@@ -83,7 +83,7 @@ int main(int argc, char *fileName[])
             {
                 flag = 1;
             }
-            else if(curVal == 10 || curVal == 32)// \n to whitespace
+            else if(curVal >= 0 && curVal <= 32)// \n to whitespace
             {
                 fileArr[index] = 32;//insert value into array
                 //printf("%d\n", fileArr[index]);
